@@ -49,7 +49,7 @@ def donate():
 @external
 def withdraw():
   # Verifica que o usuário realmente doou alguma vez
-  assert block.timestamp < self.deadline
+  assert self.balance < self.target
   assert self.donations[msg.sender].amount > 0
 
   send(msg.sender, self.donations[msg.sender].amount)

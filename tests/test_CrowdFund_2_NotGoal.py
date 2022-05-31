@@ -50,8 +50,9 @@ def test_fund(crowd_contract, accounts):
         crowd_contract.finish({"from": accounts[0]})
 
     # Refund
-    with brownie.reverts():
-        crowd_contract.withdraw({'from': accounts[2]})
+    crowd_contract.withdraw({'from': accounts[2]})
+    assert crowd_contract.donations(
+        accounts[2].address) == 0  # Directly access donations
 
     # Refund Non donator
     with brownie.reverts():
